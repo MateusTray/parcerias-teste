@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="https://images.tcdn.com.br/static_inst/site/cliente/tray-cdn/themes/cliente/img/favicon.ico?2">
+    <title>Lista de produtos - Tray</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="navbar">
+        <h5>PLANO 1 - LOJA: 1261831</h5>
+        <h2>teste aprendizado</h2>
+    </div>
+    <div class="container">
+      <br><br><br><br><br><br>
+
+
+      <h5 id="breadcumbs">Produtos > Lista de produtos</h5>  
+      <h1>Lista de produtos</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Produto</th> 
+            <th>Nome</th>
+            <th>Preço</th>
+       
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in products %}
+          <tr>
+            <td>{{ item.Product.id }}</td>
+            
+            
+            <td>{{ item.Product.ProductImage.https }}
+
+                {% if item.Product.ProductImage %}
+                  <img src="{{ item.Product.ProductImage[0].thumbs['180'].https }}" alt="Imagem do Produto" width="50" height="50">
+                {% else %}
+                <img src="https://testeaprendizado.commercesuite.com.br/admin/assets/img/no-image.bdd35868.svg" alt="Sem imagem do Produto" width="50" height="50">
+                {% endif %}
+            </td>
+            <td>{{ item.Product.name }}</td>
+            <td>R$ {{ item.Product.price.replace('.', ',') }}</td>
+       
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('index', page=page-1) }}">Anterior</a>
+        {% endif %}
+        <span>Page {{ page }}</span>
+        {% if total > page * limit %}
+        <a href="{{ url_for('index', page=page+1) }}">Próximo</a>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+  <footer class="footer">
+    <br>
+
+    <p>Desenvolvido por Mateus</p>
+    <h5>Tecnologia Tray</h5>
+    <img src="https://partners.tray.com.br/~gitbook/image?url=https%3A%2F%2F1839869746-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F3hj8oft1MPhUOpc5MNxo%252Flogo%252FcZbgXWkl4jrXPs7HdV9W%252Ftray.png%3Falt%3Dmedia%26token%3D2eefc80b-6ae8-41a6-bc59-0759178c8168&width=192&dpr=1&quality=100&sign=26d38cf5ca15a3778df176f0c4855ee4451968290a212157b84c197637df09cb"  width="50" height="30" alt="">
+
+    <br>
+
+  </footer>
+</html>
